@@ -12,20 +12,17 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  height: 100vh;
   min-width: 320px;
   font-family: 'Roboto', sans-serif;
-  background: url('../img//bg.jpg') center center / cover no-repeat;
   line-height: 1.5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: #292929;
 }
 
 .container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 0 5px;
+  padding: 5px;
 }
 
 h1 {
@@ -102,7 +99,7 @@ header .container {
   padding: 15px 20px;
   margin-bottom: 3px;
   border-radius: 5px;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.2);
 }
 
 .playlist__description {
@@ -123,17 +120,17 @@ header .container {
 }
 
 .is__play {
-  color: crimson;
+  color: #8A088E;
 }
 
 /* Player */
 .player {
   max-width: 650px;
-  max-height: 150px;
   margin: auto;
-  margin-bottom: 27px;
+  margin-bottom: 8px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(1, 200px);
   gap: 3px;
 }
 
@@ -183,12 +180,11 @@ header .container {
 }
 
 .player .player__item.one {
-  background-color: #C3E6E0;
+  background: url('../img//speaker.jpg') center center / cover no-repeat;
 }
 
 .player .player__item.two {
-  background-color: rgba(0,0,0,0.7);
-  background-color: #292929;
+  background-color: #000;
   grid-column: 3 / 5;
 }
 
@@ -197,7 +193,7 @@ header .container {
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  color: white;
+  color: #b3b3b3;
   font-size: 0.7rem;
   text-shadow: 1px 1px 2px #0000;
   font-weight: 700;
@@ -208,7 +204,7 @@ header .container {
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid #42291A;
+  border: 2px solid #42291A;
 }
 
 .player img.is__play {
@@ -248,7 +244,7 @@ header .container {
 .player__progress__bar {
   width: 0;
   height: 3px;
-  background-color: crimson;
+  background-color: #8A088E;
 }
 
 .player .player__ctr__btn {
@@ -278,7 +274,7 @@ header .container {
 }
 
 .fa-rotate-right.is__play {
-  color: crimson;
+  color: #8A088E;
 }
 
 /* Footer */
