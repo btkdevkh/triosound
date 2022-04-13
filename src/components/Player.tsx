@@ -99,9 +99,6 @@ export default function Player(props: Props) {
   
   useEffect(() => {
     if(isPlay) play()
-    if(songs && prevIdx !== idxSong) {
-      play();
-    }
   }, [prevIdx, isPlay, idxSong, songs, isMuted])
 
   return (

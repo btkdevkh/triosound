@@ -23,6 +23,7 @@ body {
   max-width: 900px;
   margin: 0 auto;
   padding: 5px;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -112,6 +113,7 @@ header .container {
   cursor: pointer;
   font-size: 0.9rem;
   text-shadow: 1px 1px 2px #333;
+  margin-bottom: 10px;
 }
 
 .playlist .fa-compact-disc {
@@ -156,17 +158,15 @@ header .container {
 
 .player .player__speaker__item::before {
   position: absolute;
-  top: 40%;
-  left: 40%;
-  transform: translate(-40%, -40%);
   content: '';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 20px;
   width: 20px;
   border-radius: 50%;
   background-color: #000;
   border: 2px solid #606060;
-  transform: translate(-1px, -1px);
-  /* animation: boom 0.3s linear infinite; */
 }
 
 .player .player__item {
@@ -204,7 +204,6 @@ header .container {
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
-  border: 2px solid #42291A;
 }
 
 .player img.is__play {
@@ -219,9 +218,9 @@ header .container {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background-color: #C3E6E0;
+  background-color: #000;
   z-index: 1000;
-  border: 3px solid #42291A;
+  border: 3px solid #606060;
 }
 
 .player .player__controls__btns {
@@ -292,12 +291,6 @@ footer {
 
   to {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes boom {
-  0% {
-    transform: translate(1px);
   }
 }
 
