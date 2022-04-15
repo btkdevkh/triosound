@@ -115,6 +115,10 @@ export default function Player(props: Props) {
           className={`${isPlay && 'is__play'}`}
         />
         <span className='cd__hold'></span>
+
+        <div className="player__progress__container" onClick={(e) => setProgress(e)}>
+          <div ref={refProgressBar} className="player__progress__bar"></div>
+        </div>
       </div>
 
       <audio 
@@ -125,7 +129,7 @@ export default function Player(props: Props) {
       />
 
       <div className='player__item two'>
-        {/* <div className="brand">JVC</div> */}
+        <div className={`diod ${isPlay && 'is__play'}`}></div>
         <div className='player__controls__btns'>
 
           <div className="player__ctr__btn">
@@ -151,9 +155,6 @@ export default function Player(props: Props) {
             </div>
           </div>
 
-          <div className="player__progress__container" onClick={(e) => setProgress(e)}>
-            <div ref={refProgressBar} className="player__progress__bar"></div>
-          </div>
         </div>
 
       </div>
