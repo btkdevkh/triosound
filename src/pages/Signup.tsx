@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { auth } from '../firebase/db'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useAuthContext } from '../hooks/useAuthContext'
-import { useNavigate } from 'react-router-dom'
 
-export default function Login() {
-  const { user, dispatch } = useAuthContext()
-  const navigate = useNavigate()
+// Reserve only for administrator
+export default function Signup() {
+  const { dispatch } = useAuthContext()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
 
-  const login = (e: any) => {
+  const signup = (e: any) => {
     e.preventDefault()
 
     setError(null)
-    signInWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password)
       .then(res => {
         dispatch({ type: 'LOGIN', payload: res.user })
 
@@ -26,15 +25,11 @@ export default function Login() {
       .catch(err => setError(err.message))
   }
 
-  useEffect(() => {
-    user && navigate('/admin')
-  }, [user])
-
   return (
-    <div className='login'>
-      <h2>Login</h2>
+    <div className='signup'>
+      <h2>Sign Up</h2>
 
-      <form onSubmit={login}>
+      <form onSubmit={signup}>
         <input 
           type="text" 
           placeholder='Email'
@@ -47,7 +42,7 @@ export default function Login() {
           value={password} 
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type="submit">Signup</button>
         <div className="error">{error && error}</div>
       </form>
     </div>

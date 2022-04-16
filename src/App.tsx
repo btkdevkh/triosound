@@ -1,22 +1,27 @@
 import './assets/css/App.css';
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import Navbar from './components/Navbar';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Home from './pages/Home';
-// import Footer from './components/Footer';
+import Signup from './pages/Signup';
+import Admin from './pages/Admin';
+import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
+  const { user } = useAuthContext()
+
   return (
     <BrowserRouter>
-      {/* <Navbar /> */}
+      { user && <Navbar /> }
       <div className="container">
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={user ? <Signup /> : <Navigate to='/' />} />
+          <Route path='/admin' element={user ? <Admin /> : <Navigate to='/' />} />
         </Routes>
       </div>
-      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
