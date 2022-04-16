@@ -18,7 +18,7 @@ export default function Navbar() {
       <div className="container">
         {
           user && 
-          <Link to={'/admin'}>
+          <Link to={'/'}>
             <h1><i className="fa-solid fa-compact-disc"></i>Trio</h1>
           </Link>
         }
@@ -27,6 +27,11 @@ export default function Navbar() {
             {
               user &&
               <>
+                <li>
+                  <Link to={'/admin'}>
+                    <i className="fa-solid fa-hammer"></i>
+                  </Link>
+                </li>
                 <li><i className="fa-solid fa-user"></i> {user.email}</li>
                 <li>
                   <Link to={'/signup'}>

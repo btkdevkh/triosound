@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import { storage, store } from '../../firebase/db'
+import { store } from '../../firebase/db'
 import { addDoc, collection } from 'firebase/firestore'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import useStorage from '../../hooks/useStorage'
 
 export default function Form() {
+  const { error, loading, upLoadFile } = useStorage()
+
   const [title, setTitle] = useState('')
   const [singer, setSinger] = useState('')
-  const [imgFile, setImgFile] = useState<any | null>(null)
-  const [songFile, setSongFile] = useState<any | null>(null)
+  const [imgFile, setImgFile] = useState<File | null>(null)
+  const [songFile, setSongFile] = useState<File | null>(null)
   const [errorFile, setErrorFile] = useState<string | null>(null)
 
   const onChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +27,7 @@ export default function Form() {
     }
   }
 
-  const onChangeMp3 = (e: any) => {
+  const onChangeMp3 = (e: React.ChangeEvent<HTMLInputElement>) => {
     let mp3FileSelected = e.target.files![0]
 
     // Allowed files types
@@ -48,31 +50,24 @@ export default function Form() {
       return
     }
     
-    if(imgFile && songFile) {      
-      const imgUploadPath = `covers/${Date.now() + imgFile.name.substring(imgFile.name.indexOf('.'))}`
-      const mp3UploadPath = `songs/${Date.now() + songFile.name.substring(songFile.name.indexOf('.'))}`
+    if(imgFile && songFile) {
+      const imgUploaded = await upLoadFile(imgFile, 'covers')
+      const songUploaded = await upLoadFile(songFile, 'songs')  
 
-      const storageImgRef = ref(storage, imgUploadPath)
-      const storageSongRef = ref(storage, mp3UploadPath)
+      if(imgUploaded && songUploaded) {
+        await addDoc(collection(store, 'playlists'), {
+          title: title,
+          singer: singer,
+          coverUrl: imgUploaded.fileUrl,
+          songUrl: songUploaded.fileUrl,
+          imgFilePath: imgUploaded.filePath,
+          songFilePath: songUploaded.filePath,
+          songs: [],
+          createdAt: Date.now()
+        })
+      }
 
-      await uploadBytes(storageImgRef, imgFile)
-      await uploadBytes(storageSongRef, songFile)
-
-      const imgUrl = await getDownloadURL(storageImgRef)
-      const songUrl = await getDownloadURL(storageSongRef)
-
-      await addDoc(collection(store, 'playlists'), {
-        title: title,
-        singer: singer,
-        coverUrl: imgUrl,
-        songUrl: songUrl,
-        imgFilePath: imgUploadPath,
-        songFilePath: mp3UploadPath,
-        songs: [],
-        createdAt: Date.now()
-      })
-
-      if(!errorFile) {
+      if(!error) {
         window.location.reload();
       }
     }

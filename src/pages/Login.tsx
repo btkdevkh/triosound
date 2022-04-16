@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { auth } from '../firebase/db'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
-  const { dispatch } = useAuthContext()
+  const { user, dispatch } = useAuthContext()
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -23,6 +25,10 @@ export default function Login() {
       })
       .catch(err => setError(err.message))
   }
+
+  useEffect(() => {
+    user && navigate('/admin')
+  }, [user])
 
   return (
     <div className='login'>

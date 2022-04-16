@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { auth } from '../firebase/db'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useAuthContext } from '../hooks/useAuthContext'
-import { useNavigate } from 'react-router-dom'
 
 // Reserve only for administrator
 export default function Signup() {
-  const { dispatch, user } = useAuthContext()
-  const navigate = useNavigate()  
+  const { dispatch } = useAuthContext()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -26,10 +24,6 @@ export default function Signup() {
       })
       .catch(err => setError(err.message))
   }
-
-  useEffect(() => {
-    !user && navigate('/')
-  }, [user])
 
   return (
     <div className='signup'>

@@ -1,28 +1,13 @@
 import { deleteDoc, doc } from 'firebase/firestore'
 import { deleteObject, ref } from 'firebase/storage'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Form from '../components/admin/Form'
 import { getSongs, storage, store } from '../firebase/db'
-import { useAuthContext } from '../hooks/useAuthContext'
 import { ISongModel } from '../models/SongModel'
 
 export default function Admin() {
-  const { user } = useAuthContext()
-  const navigate = useNavigate()  
-
   const [songs, setSongs] = useState<ISongModel[] | null>(null)
   const [isAdd, setIsAdd] = useState(false)
-
-  useEffect(() => {   
-    getSongs().then(songDatas => {
-      setSongs(songDatas as ISongModel[])
-    })   
-  }, [])
-
-  useEffect(() => {
-    !user && navigate('/')
-  }, [user])
 
   const handleDelete = async (id: any, imgPath: string, songPath: string) => {
     const storageImgRef = ref(storage, imgPath)
@@ -36,6 +21,12 @@ export default function Admin() {
       window.location.reload();
     }      
   }
+
+  useEffect(() => {   
+    getSongs().then(songDatas => {
+      setSongs(songDatas as ISongModel[])
+    })   
+  }, [])
 
   return (
     <div className='admin'>
