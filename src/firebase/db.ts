@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore, collection, getDocs, query, orderBy } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -11,8 +12,12 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
+// Init Firebase
 initializeApp(firebaseConfig)
+// Init Firestore
 const store = getFirestore()
+// Init Firebase Auth
+const auth = getAuth()
 
 const colRef = collection(store, 'playlists')
 
@@ -33,4 +38,4 @@ function getSongs() {
     })
 }
   
-export { getSongs }
+export { getSongs, auth }
