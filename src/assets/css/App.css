@@ -54,7 +54,9 @@ img {
 
 form {
   max-width: 320px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
 }
 
 form input {
@@ -110,12 +112,17 @@ header {
 header .container {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+
+header .container h1 {
+  margin-bottom: 0;
+  font-size: 1.5rem;
 }
 
 .navbar ul {
   display: flex;
-  gap: 20px;
+  gap: 10px;
 }
 
 .navbar ul li a {
@@ -336,12 +343,93 @@ header .container {
   color: #8A088E;
 }
 
-/* Footer */
-footer {
-  color: #333;
-  font-weight: 700;
+/* Admin */
+.admin {
+  color: #fff;
   text-align: center;
-  font-family: 'Beau Rivage', cursive;
+}
+
+.admin div {
+  text-align: center;
+  background-color: crimson;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 3px;
+	cursor: pointer;
+}
+
+.admin .input__file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.admin .input__file + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  width: 100%;
+}
+
+.admin div:hover {
+  background-color: red;
+}
+
+.admin div .input__file + label {
+  cursor: pointer;
+}
+
+.admin button {
+  border: 0;
+  padding: 12px 20px;
+  color: #fff;
+  font-family: inherit;
+  background-color: green;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.admin table {
+  max-width: 900px;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+
+}
+
+.admin table thead {
+  border-radius: 5px;
+  background-color: #5F058B;
+}
+
+.admin table th {
+  padding: 10px;
+  border: 1px solid #b3b3b3;
+}
+
+.admin table td {
+  padding: 5px;
+  border: 1px solid #b3b3b3;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.admin img {
+  width: 60px;
+  height: 40px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.del {
+  cursor: pointer;
+  color: crimson;
 }
 
 @keyframes spin {

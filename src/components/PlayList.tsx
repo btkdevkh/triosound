@@ -9,9 +9,9 @@ export default function PlayList() {
   const [idxSong, setIdxSong] = useState<number>(0)
 
   useEffect(() => {
-    // getSongs().then(songDatas => {
-    //   setSongs(songDatas as ISongModel[])
-    // })
+    getSongs().then(songDatas => {
+      setSongs(songDatas as ISongModel[])
+    })
   }, [])
 
   if(!songs) return <></>

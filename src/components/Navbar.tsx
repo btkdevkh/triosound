@@ -16,30 +16,32 @@ export default function Navbar() {
   return (
     <header>
       <div className="container">
+        {
+          user && 
+          <Link to={'/admin'}>
+            <h1><i className="fa-solid fa-compact-disc"></i>Trio</h1>
+          </Link>
+        }
         <nav className='navbar'>
           <ul>
             {
-              !user ?
+              user &&
               <>
-                <li>
-                  <Link to={'/login'}>
-                    <i className="fa-solid fa-user"></i> Login
-                  </Link>
-                </li>
+                <li><i className="fa-solid fa-user"></i> {user.email}</li>
                 <li>
                   <Link to={'/signup'}>
-                    <i className="fa-solid fa-user-group"></i> Signup
+                    <i className="fa-solid fa-user-group"></i>
                   </Link>
                 </li>
-              </> :
-              <li>
-                <Link 
-                  to={'#'} 
-                  onClick={logOut}
-                >
-                  <i className="fa-solid fa-right-from-bracket"></i> Logout
-                </Link>
-              </li>
+                <li>
+                  <Link 
+                    to={'#'} 
+                    onClick={logOut}
+                  >
+                    <i className="fa-solid fa-right-from-bracket"></i>
+                  </Link>
+                </li>
+              </>
             }
           </ul>
         </nav>

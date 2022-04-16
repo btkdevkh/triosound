@@ -7,4 +7,6 @@ export interface ISongModel {
   createdAt: string;
   genres?: string;
   singer: string;
+  imgFilePath?: string;
+  songFilePath?: string;
 }
