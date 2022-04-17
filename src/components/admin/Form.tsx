@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { store } from '../../firebase/db'
-import { addDoc, collection } from 'firebase/firestore'
 import useStorage from '../../hooks/useStorage'
+import useCollection from '../../hooks/useCollection'
 
 export default function Form() {
+  const { addDocument } = useCollection('playlists')
   const { error, loading, upLoadFile } = useStorage()
 
   const [title, setTitle] = useState('')
@@ -55,7 +55,7 @@ export default function Form() {
       const songUploaded = await upLoadFile(songFile, 'songs')  
 
       if(imgUploaded && songUploaded) {
-        await addDoc(collection(store, 'playlists'), {
+        await addDocument({
           title: title,
           singer: singer,
           coverUrl: imgUploaded.fileUrl,
@@ -109,7 +109,7 @@ export default function Form() {
         <span>{songFile && songFile.name}</span>
       </div>
 
-      <button type="submit">Submit</button>
+      <button type="submit">{loading ? 'Processing...' : 'Submit'}</button>
 
       <span className='error'>{errorFile && errorFile}</span>
     </form>

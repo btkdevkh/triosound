@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, getDocs, query, orderBy } from 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 import { getStorage } from 'firebase/storage'
 
@@ -21,24 +21,5 @@ const store = getFirestore()
 const auth = getAuth()
 // Init Firebase storage
 const storage = getStorage()
-
-const colRef = collection(store, 'playlists')
-
-const q = query(colRef, orderBy('createdAt', 'desc'))
-
-function getSongs() {
-  return getDocs(q)
-    .then(snapshot => {
-      let results: any[] = [];
-      snapshot.docs.forEach(doc => {
-        results.push({ ...doc.data(), id: doc.id });
-      })      
   
-      return results
-    })
-    .catch(err => {
-      console.log(err.message);
-    })
-}
-  
-export { getSongs, auth, storage, store }
+export { auth, storage, store }

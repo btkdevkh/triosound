@@ -1,6 +1,6 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { useState } from "react"
 import { storage } from "../firebase/db"
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage"
 
 const useStorage = () => {
   const [error, setError] = useState('')
@@ -27,7 +27,12 @@ const useStorage = () => {
     }
   }
 
-  return { error, loading, upLoadFile }
+  const deleteFile = async (filePath: string) => {
+    const storageRef = ref(storage, filePath)
+    await deleteObject(storageRef)
+  }
+
+  return { error, loading, upLoadFile, deleteFile }
 }
 
 export default useStorage
