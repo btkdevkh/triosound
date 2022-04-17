@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { store } from '../firebase/db'
 import { collection, addDoc, query, orderBy, getDocs, deleteDoc, doc } from "firebase/firestore"; 
+import { ISongModel } from '../models/SongModel';
 
 const useCollection = (collectionName: string) => {
+  const [documents, setDocuments] = useState<ISongModel[] | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [isPending, setIsPending] = useState(false)
 
@@ -45,7 +47,13 @@ const useCollection = (collectionName: string) => {
     await deleteDoc(doc(store, collectionName, id));  
   }
 
-  return { error, isPending, addDocument, getDocuments, deleteDcument }
+  useEffect(() => {
+    getDocuments().then(songDatas => {
+      setDocuments(songDatas as ISongModel[])
+    })
+  }, [])
+
+  return { error, isPending, documents, addDocument, getDocuments, deleteDcument }
 }
 
 export default useCollection
