@@ -10,25 +10,28 @@ export default function PlayList() {
   return (
     <>
       <Player /> 
-      <div className='playlist'>
-        {
-          songs && songs.length > 0 &&
-          songs.map((song, i) => (
-            <div key={song.id} className='playlist__description'>
-              <span onClick={() => {
-                dispatch({ type: 'SET_IDX_SONG', payload: i })
-                dispatch({ type: 'SET_IS_PLAY', payload: true })
-              }}>
-                <i className={`fa-solid fa-compact-disc ${idxSong === i && 'is__play'}`}></i> {' '}
-                {song.title} - {song.singer}
-              </span>
-              <span className='playlist__ctr__btn'>
-                <i className={`fa-solid fa-headphones ${idxSong === i && 'is__play'}`}></i>
-              </span>
-            </div>
-          ))
-        }
-      </div>
+      {
+        songs && songs.length > 0 && (
+          <div className='playlist'>
+            {
+              songs.map((song, i) => (
+                <div key={song.id} className='playlist__description'>
+                  <span onClick={() => {
+                    dispatch({ type: 'SET_IDX_SONG', payload: i })
+                    dispatch({ type: 'SET_IS_PLAY', payload: true })
+                  }}>
+                    <i className={`fa-solid fa-compact-disc ${idxSong === i && 'is__play'}`}></i> {' '}
+                    {song.title} - {song.singer}
+                  </span>
+                  <span className='playlist__ctr__btn'>
+                    <i className={`fa-solid fa-headphones ${idxSong === i && 'is__play'}`}></i>
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        )
+      }
     </>
   )
 }
