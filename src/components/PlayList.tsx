@@ -1,35 +1,23 @@
-import React, { useState } from 'react'
-import useCollection from '../hooks/useCollection'
-import { ISongModel } from '../models/SongModel'
+import React from 'react'
+import { useSongContext } from '../hooks/useSongContext'
 import Player from './Player'
 
 export default function PlayList() {
-  const { documents } = useCollection('playlists')
-  const [isPlay, setIsPlay] = useState(false)
-  const [idxSong, setIdxSong] = useState<number>(0)
+  const { songs, idxSong, dispatch } = useSongContext()
 
-  if(!documents) return <></>
+  if(!songs) return <></>
   
   return (
     <>
-      { 
-        documents && 
-        <Player 
-          songs={documents as ISongModel[]} 
-          isPlay={isPlay}
-          idxSong={idxSong}
-          setIdxSong={setIdxSong}
-          setIsPlay={setIsPlay}
-        /> 
-      }
+      <Player /> 
       <div className='playlist'>
         {
-          documents && documents.length > 0 &&
-          documents.map((song, i) => (
+          songs && songs.length > 0 &&
+          songs.map((song, i) => (
             <div key={song.id} className='playlist__description'>
               <span onClick={() => {
-                setIdxSong(i)
-                setIsPlay(true)
+                dispatch({ type: 'SET_IDX_SONG', payload: i })
+                dispatch({ type: 'SET_IS_PLAY', payload: true })
               }}>
                 <i className={`fa-solid fa-compact-disc ${idxSong === i && 'is__play'}`}></i> {' '}
                 {song.title} - {song.singer}

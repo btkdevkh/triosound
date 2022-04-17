@@ -7,22 +7,25 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Admin from './pages/Admin';
 import { useAuthContext } from './hooks/useAuthContext';
+import { SongContextProvider } from './context/song/SongContext';
 
 function App() {
   const { user } = useAuthContext()
 
   return (
-    <BrowserRouter>
-      { user && <Navbar /> }
-      <div className="container">
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={user ? <Signup /> : <Navigate to='/' />} />
-          <Route path='/admin' element={user ? <Admin /> : <Navigate to='/' />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <SongContextProvider>
+      <BrowserRouter>
+        { user && <Navbar /> }
+        <div className="container">
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={user ? <Signup /> : <Navigate to='/' />} />
+            <Route path='/admin' element={user ? <Admin /> : <Navigate to='/' />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </SongContextProvider>
   );
 }
 
