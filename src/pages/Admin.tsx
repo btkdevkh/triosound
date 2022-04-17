@@ -1,29 +1,28 @@
-import { deleteDoc, doc } from 'firebase/firestore'
-import { deleteObject, ref } from 'firebase/storage'
 import React, { useEffect, useState } from 'react'
 import Form from '../components/admin/Form'
-import { getSongs, storage, store } from '../firebase/db'
 import { ISongModel } from '../models/SongModel'
+import useCollection from '../hooks/useCollection'
+import useStorage from '../hooks/useStorage'
 
 export default function Admin() {
+  const { deleteFile } = useStorage()
+  const { getDocuments, deleteDcument } = useCollection('playlists')
+
   const [songs, setSongs] = useState<ISongModel[] | null>(null)
   const [isAdd, setIsAdd] = useState(false)
 
   const handleDelete = async (id: any, imgPath: string, songPath: string) => {
-    const storageImgRef = ref(storage, imgPath)
-    const storageSongRef = ref(storage, songPath)
-
     if(confirm('Do you want to delete this song ?')) {
-      await deleteObject(storageImgRef)
-      await deleteObject(storageSongRef)
-      await deleteDoc(doc(store, 'playlists', id));
+      await deleteFile(imgPath)
+      await deleteFile(songPath)
+      await deleteDcument(id)
 
       window.location.reload();
     }      
   }
 
   useEffect(() => {   
-    getSongs().then(songDatas => {
+    getDocuments().then(songDatas => {
       setSongs(songDatas as ISongModel[])
     })   
   }, [])

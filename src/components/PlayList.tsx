@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
+import useCollection from '../hooks/useCollection'
 import { ISongModel } from '../models/SongModel'
 import Player from './Player'
-import { getSongs } from '../firebase/db';
 
 export default function PlayList() {
+  const { getDocuments } = useCollection('playlists')
+
   const [songs, setSongs] = useState<ISongModel[] | null>(null)
   const [isPlay, setIsPlay] = useState(false)
   const [idxSong, setIdxSong] = useState<number>(0)
 
   useEffect(() => {
-    getSongs().then(songDatas => {
+    getDocuments().then(songDatas => {
       setSongs(songDatas as ISongModel[])
     })
   }, [])

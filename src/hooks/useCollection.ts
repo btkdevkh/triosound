@@ -1,10 +1,12 @@
-import { store } from '../firebase/db'
-import { collection, addDoc } from "firebase/firestore"; 
 import { useState } from 'react';
+import { store } from '../firebase/db'
+import { collection, addDoc, query, orderBy, getDocs, deleteDoc, doc } from "firebase/firestore"; 
 
 const useCollection = (collectionName: string) => {
   const [error, setError] = useState<string | null>(null)
   const [isPending, setIsPending] = useState(false)
+
+  const colRef = collection(store, collectionName)
 
   // add a new document
   const addDocument = async (doc: any) => {
@@ -12,7 +14,7 @@ const useCollection = (collectionName: string) => {
     setIsPending(true)
 
     try {
-      await addDoc(collection(store, collectionName), doc)
+      await addDoc(colRef, doc)
       setIsPending(false)
     }
     catch(err: any) {
@@ -22,7 +24,28 @@ const useCollection = (collectionName: string) => {
     }
   }
 
-  return { error, isPending, addDocument }
+  const getDocuments = async () => {
+    const q = query(colRef, orderBy('createdAt', 'desc'))
+
+    return getDocs(q)
+      .then(snapshot => {
+        let results: any[] = [];
+        snapshot.docs.forEach(doc => {
+          results.push({ ...doc.data(), id: doc.id });
+        })      
+    
+        return results
+      })
+      .catch(err => {
+        console.log(err.message);
+      })
+  }
+
+  const deleteDcument = async (id: string) => {
+    await deleteDoc(doc(store, collectionName, id));  
+  }
+
+  return { error, isPending, addDocument, getDocuments, deleteDcument }
 }
 
 export default useCollection
