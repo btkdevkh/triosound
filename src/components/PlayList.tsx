@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import useCollection from '../hooks/useCollection'
 import { ISongModel } from '../models/SongModel'
 import Player from './Player'
 
 export default function PlayList() {
-  const { getDocuments } = useCollection('playlists')
-
-  const [songs, setSongs] = useState<ISongModel[] | null>(null)
+  const { documents } = useCollection('playlists')
   const [isPlay, setIsPlay] = useState(false)
   const [idxSong, setIdxSong] = useState<number>(0)
 
-  useEffect(() => {
-    getDocuments().then(songDatas => {
-      setSongs(songDatas as ISongModel[])
-    })
-  }, [])
-
-  if(!songs) return <></>
+  if(!documents) return <></>
   
   return (
     <>
       { 
-        songs && 
+        documents && 
         <Player 
-          songs={songs as ISongModel[]} 
+          songs={documents as ISongModel[]} 
           isPlay={isPlay}
           idxSong={idxSong}
           setIdxSong={setIdxSong}
@@ -32,11 +24,10 @@ export default function PlayList() {
       }
       <div className='playlist'>
         {
-          songs && songs.length > 0 &&
-          songs.map((song, i) => (
+          documents && documents.length > 0 &&
+          documents.map((song, i) => (
             <div key={song.id} className='playlist__description'>
               <span onClick={() => {
-                setSongs(songs)
                 setIdxSong(i)
                 setIsPlay(true)
               }}>
