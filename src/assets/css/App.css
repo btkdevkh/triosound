@@ -334,6 +334,10 @@ header .container h1 {
   text-shadow: 1px 1px 2px #333;
 }
 
+.player__item .two {
+  position: relative;
+}
+
 .player .player__ctr__settings {
   display: flex;
   gap: 20px;
@@ -345,6 +349,47 @@ header .container h1 {
 
 .fa-rotate-right.is__play {
   color: #8A088E;
+}
+
+/* Volume */
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: #d3d3d3;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: width 150ms ease-in-out, transform 150ms ease-in-out;
+  cursor: pointer;
+}
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; 
+  appearance: none;
+  width: 20px; 
+  height: 7px; 
+  background: #04AA6D;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.volume-slider::-moz-range-thumb {
+  width: 20px; 
+  height: 7px; 
+  background: #04AA6D;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.volume-slider,
+.volume-slider:focus-within {
+  width: 98%;
+  margin: 0 auto;
+  transform: scaleX(1);
 }
 
 /* Admin */

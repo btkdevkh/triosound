@@ -8,6 +8,7 @@ export default function Player() {
   const refAudio = useRef<HTMLAudioElement | null>(null)
   const refIplay = useRef<HTMLElement | null>(null)
   const refProgressBar = useRef<HTMLDivElement | null>(null)
+
   const [isMuted, setIsMuted] = useState(true)
   const [isRepeated, setIsRepeated] = useState(true)
 
@@ -62,12 +63,25 @@ export default function Player() {
     play(); 
   }
 
-  const mute = () => {
-    setIsMuted((o: boolean) => !o)
-
-    if(refAudio) {
+  // Volume
+  const volumeSliderManager = (e: any) => {
+    if(Number(e.target.value) === 0) {      
+      setIsMuted(false)
       refAudio.current!.muted = isMuted
-    } 
+    } else {
+      setIsMuted(true)
+      refAudio.current!.muted = isMuted
+    }
+
+    refAudio.current!.volume = e.target.value
+    refAudio.current!.muted = e.target.value === 0
+  }
+
+  const mute = (e: any) => {    
+    if(!e.target.classList.contains('volume-slider')) {
+      setIsMuted((o: boolean) => !o)
+      refAudio.current!.muted = isMuted
+    }
   }
 
   const repeat = () => {
@@ -152,9 +166,24 @@ export default function Player() {
                     <button onClick={repeat}>
                       <i className={`fa-solid fa-rotate-right ${!isRepeated && 'is__play'}`}></i>
                     </button>
-                    <button onClick={mute}>
-                      <i className={`${isMuted ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark'}`}></i>
-                    </button>
+
+                    <div
+                      className='volume__btn'
+                      onClick={mute}
+                    >
+                      <input
+                        className='volume-slider'
+                        type="range" 
+                        min={0} 
+                        max={1} 
+                        step='any' 
+                        onInput={volumeSliderManager}
+                      />
+                        
+                      <button>
+                        <i className={`${isMuted ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark'}`}></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
