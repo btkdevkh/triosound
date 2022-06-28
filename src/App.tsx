@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import Admin from './pages/Admin';
 import { useAuthContext } from './hooks/useAuthContext';
 import { SongContextProvider } from './context/song/SongContext';
+import Noel from './components/Noel';
 
 function App() {
   const { user } = useAuthContext()
@@ -15,6 +16,7 @@ function App() {
   return (
     <SongContextProvider>
       <BrowserRouter>
+        <Noel />
         { user && <Navbar /> }
         <div className="container">
           <Routes>
