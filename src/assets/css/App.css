@@ -13,12 +13,13 @@ html {
 
 body {
   position: relative;
-  min-height: 100vh;
   min-width: 320px;
+  min-height: 100vh;
   font-family: 'Roboto', sans-serif;
   line-height: 1.5;
   background-color: #292929;
-  background: url('../img//bg.jpg') center center / cover no-repeat;
+  background: url('../img/bg.jpg') center center / cover no-repeat;
+  overflow-x: hidden;
 }
 
 body::before {
@@ -100,7 +101,7 @@ a {
 .container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 5px;
+  padding: 2px 5px;
   overflow-x: hidden;
 }
 
