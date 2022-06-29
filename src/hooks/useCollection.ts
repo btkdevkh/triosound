@@ -16,8 +16,12 @@ const useCollection = (collectionName: string) => {
     setIsPending(true)
 
     try {
-      await addDoc(colRef, doc)
-      setIsPending(false)
+      const data = await addDoc(colRef, doc)
+
+      setError(null)
+      setIsPending(false)    
+
+      return data
     }
     catch(err: any) {
       console.log(err.message)
@@ -26,20 +30,20 @@ const useCollection = (collectionName: string) => {
     }
   }
 
-  const getDocuments = async () => {
+  const getDocuments = async () => { 
     const q = query(colRef, orderBy('createdAt', 'desc'))
 
-    return getDocs(q)
-      .then(snapshot => {
+    return await getDocs(q)
+      .then(snapshot => { 
         let results: any[] = [];
         snapshot.docs.forEach(doc => {
           results.push({ ...doc.data(), id: doc.id });
-        })      
-    
+        })
+
         return results
       })
       .catch(err => {
-        console.log(err.message);
+        console.log(err.message)
       })
   }
 
@@ -48,9 +52,10 @@ const useCollection = (collectionName: string) => {
   }
 
   useEffect(() => {
-    getDocuments().then(songDatas => {
-      setDocuments(songDatas as ISongModel[])
-    })
+    getDocuments()
+      .then(songsData => {
+        setDocuments(songsData as ISongModel[])
+      })
   }, [])
 
   return { error, isPending, documents, addDocument, getDocuments, deleteDcument }

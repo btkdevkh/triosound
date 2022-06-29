@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import Form from '../components/admin/Form'
 import useCollection from '../hooks/useCollection'
+import { useSongContext } from '../hooks/useSongContext'
 import useStorage from '../hooks/useStorage'
 
 export default function Admin() {
+  const { songs: documents, dispatch } = useSongContext()
+
   const { deleteFile } = useStorage()
-  const { documents, deleteDcument } = useCollection('playlists')
+  const { deleteDcument } = useCollection('playlists')
 
   const [isAdd, setIsAdd] = useState(false)
 
@@ -15,7 +18,7 @@ export default function Admin() {
       await deleteFile(songPath)
       await deleteDcument(id)
 
-      window.location.reload();
+      dispatch({ type: 'DELETE_SONG', payload: id }) 
     }      
   }
 

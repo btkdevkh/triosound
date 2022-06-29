@@ -18,7 +18,7 @@ interface SongContext {
 export const SongContext = createContext<SongContext | null>(null)
 
 export function SongContextProvider({ children }: Props) {
-  const { documents } = useCollection('playlists')
+  const { documents } = useCollection('playlists')    
 
   const [state, dispatch] = useReducer(songReducer, {
     songs: [],
@@ -26,10 +26,8 @@ export function SongContextProvider({ children }: Props) {
     idxSong: 0
   })
 
-  useEffect(() => {
-    if(documents && documents.length > 0) {
-      dispatch({ type: 'GET_SONGS', payload: documents }) 
-    }   
+  useEffect(() => { 
+    dispatch({ type: 'GET_SONGS', payload: documents }) 
   }, [documents])
 
   return (

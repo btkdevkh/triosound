@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import useStorage from '../../hooks/useStorage'
 import useCollection from '../../hooks/useCollection'
+import { useSongContext } from '../../hooks/useSongContext'
 
 export default function Form() {
-  const { addDocument } = useCollection('playlists')
-  const { error, loading, upLoadFile } = useStorage()
+  const { dispatch } = useSongContext()
+
+  const { addDocument, getDocuments } = useCollection('playlists')
+  const { loading, upLoadFile } = useStorage()  
 
   const [title, setTitle] = useState('')
   const [singer, setSinger] = useState('')
@@ -55,7 +58,7 @@ export default function Form() {
       const songUploaded = await upLoadFile(songFile, 'songs')  
 
       if(imgUploaded && songUploaded) {
-        await addDocument({
+        const song = await addDocument({
           title: title,
           singer: singer,
           coverUrl: imgUploaded.fileUrl,
@@ -64,11 +67,23 @@ export default function Form() {
           songFilePath: songUploaded.filePath,
           songs: [],
           createdAt: Date.now()
-        })
-      }
+        })         
+        
+        if(song) {
+          setTitle('')
+          setSinger('')
+          setImgFile(null)
+          setSongFile(null)
+          setErrorFile(null)
 
-      if(!error) {
-        window.location.reload();
+          getDocuments()
+            .then(dts => {
+              dispatch({ type: 'GET_SONGS', payload: dts }) 
+            })
+            .catch(err => {
+              console.log(err);
+            })
+        } 
       }
     }
   }
