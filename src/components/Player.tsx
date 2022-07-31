@@ -121,7 +121,7 @@ export default function Player() {
         songs && songs.length > 0 && (
           <div className='player'>
             <div className="player__speaker">
-              <div className="brand">JVC</div>
+              <div className="brand">TRIO</div>
               <div className="player__speaker__item"></div>
             </div>
 
@@ -192,7 +192,7 @@ export default function Player() {
             </div>
 
             <div className="player__speaker">
-              <div className="brand">JVC</div>
+              <div className="brand">TRIO</div>
               <div className="player__speaker__item"></div>
             </div>
           </div>
