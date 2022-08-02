@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { auth } from '../firebase/db'
 import { signOut } from 'firebase/auth'
 import { useAuthContext } from '../hooks/useAuthContext'
+import '../assets/css/Navbar.css'
 
 export default function Navbar() {
   const { user, dispatch } = useAuthContext()

@@ -1,0 +1,36 @@
+/* PlayList */
+.playlist {
+  max-width: 650px;
+  margin: auto;
+  color: white;
+  padding: 15px;
+  margin-bottom: 3px;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.playlist__description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.playlist__description span {
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-shadow: 1px 1px 2px #333;
+}
+
+.playlist__description:last-child {
+  margin-bottom: 0px;
+}
+
+.playlist .fa-compact-disc {
+  font-size: 0.8rem;
+  margin-right: 5px;
+}
+
+.is__play {
+  color: #8A088E;
+}

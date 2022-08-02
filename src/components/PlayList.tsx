@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSongContext } from '../hooks/useSongContext'
 import Player from './Player'
+import '../assets/css/PlayList.css'
 
 export default function PlayList() {
   const { songs, idxSong, dispatch } = useSongContext()

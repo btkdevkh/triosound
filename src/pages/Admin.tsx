@@ -3,6 +3,7 @@ import Form from '../components/admin/Form'
 import useCollection from '../hooks/useCollection'
 import { useSongContext } from '../hooks/useSongContext'
 import useStorage from '../hooks/useStorage'
+import '../assets/css/Admin.css'
 
 export default function Admin() {
   const { songs: documents, dispatch } = useSongContext()
