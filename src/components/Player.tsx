@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { usePrevious } from '../hooks/usePrevious';
 import { useSongContext } from '../hooks/useSongContext';
+import '../assets/css/Player.css'
 
 export default function Player() {  
   const { songs, idxSong, isPlay, dispatch } = useSongContext()  

@@ -1,0 +1,29 @@
+/* Navbar */
+header {
+  color: #fff;
+}
+
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header .container a {
+  text-decoration: none;
+}
+
+header .container h1 {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 10px;
+}
+
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+}
