@@ -31,7 +31,7 @@ export function SongContextProvider({ children }: Props) {
   }, [documents])
 
   return (
-    <SongContext.Provider value={{ ...state, dispatch}}>
+    <SongContext.Provider value={{ ...state, dispatch }}>
       {children}
     </SongContext.Provider>
   )
