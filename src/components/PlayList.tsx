@@ -1,12 +1,15 @@
+import '../assets/css/PlayList.css'
 import React from 'react'
 import { useSongContext } from '../hooks/useSongContext'
 import Player from './Player'
-import '../assets/css/PlayList.css'
+import useCollection from '../hooks/useCollection'
+import Loader from './Loader'
 
 export default function PlayList() {
+  const { isPending } = useCollection('playlists')    
   const { songs, idxSong, dispatch } = useSongContext()
 
-  if(!songs) return <></>
+  if(!songs) return <Loader />
   
   return (
     <>
