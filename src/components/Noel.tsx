@@ -5,12 +5,13 @@ const Noel = () => {
   const [guirlandeAmpoules, setGuirlandeAmpoules] = useState<number[]>([]);
 
   const generateNum = () => {
-    let num = 100;
     let numArray = [];
 
-    for(let i = 0; i <= num; i++) { numArray.push(i) };
+    for(let i = 0; i <= 100; i++) {      
+      numArray.push(i)
+    }
     setGuirlandeAmpoules(numArray);
-  };
+  }
 
   useEffect(() => {
     generateNum();

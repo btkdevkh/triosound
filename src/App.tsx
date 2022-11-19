@@ -8,7 +8,8 @@ import Signup from './pages/Signup';
 import Admin from './pages/Admin';
 import { useAuthContext } from './hooks/useAuthContext';
 import { SongContextProvider } from './context/song/SongContext';
-import Noel from './components/Noel';
+import Footer from './components/Footer';
+// import Noel from './components/Noel';
 
 function App() {
   const { user } = useAuthContext()
@@ -16,7 +17,7 @@ function App() {
   return (
     <SongContextProvider>
       <BrowserRouter>
-        <Noel />
+        {/* <Noel /> */}
         { user && <Navbar /> }
         <div className="container">
           <Routes>
@@ -26,6 +27,7 @@ function App() {
             <Route path='/admin' element={user ? <Admin /> : <Navigate to='/' />} />
           </Routes>
         </div>
+        <Footer />
       </BrowserRouter>
     </SongContextProvider>
   );
