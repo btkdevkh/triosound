@@ -7,7 +7,7 @@ export const useMyYoutubeAPI = () => {
 
   const getDocuments = async () => {
     const res = await fetch(YOUTUBE_API_URL)
-    const data = await res.json()
+    const data = await res.json()    
     
     if(data) setDocuments(data.items)
   }
