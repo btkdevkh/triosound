@@ -8,7 +8,7 @@ import Signup from './pages/Signup';
 import Admin from './pages/Admin';
 import { useAuthContext } from './hooks/useAuthContext';
 import { SongContextProvider } from './context/song/SongContext';
-import Footer from './components/Footer';
+import YoutubeVideoList from './components/youtube/YoutubeVideoList';
 // import Noel from './components/Noel';
 
 function App() {
@@ -26,8 +26,8 @@ function App() {
             <Route path='/signup' element={user ? <Signup /> : <Navigate to='/' />} />
             <Route path='/admin' element={user ? <Admin /> : <Navigate to='/' />} />
           </Routes>
+          <YoutubeVideoList />
         </div>
-        <Footer />
       </BrowserRouter>
     </SongContextProvider>
   );
