@@ -43,7 +43,7 @@ export default function Admin() {
               <tr key={song.id}>
                 <td>{idx + 1}</td>
                 <td>
-                  <img src={song.coverUrl} />
+                  <img src={song.coverUrl} alt="song cover" />
                 </td>
                 <td>{song.title}</td>
                 <td

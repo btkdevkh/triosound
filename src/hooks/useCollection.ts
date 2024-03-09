@@ -62,6 +62,8 @@ const useCollection = (collectionName: string) => {
     getDocuments().then((songsData) => {
       setDocuments(songsData as ISongModel[]);
     });
+
+    // eslint-disable-next-line
   }, []);
 
   return {
