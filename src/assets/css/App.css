@@ -1,11 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Beau+Rivage&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Beau+Rivage&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 3.5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 1px;
 }
 
 html {
@@ -16,23 +33,26 @@ body {
   position: relative;
   min-width: 320px;
   min-height: 100vh;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   line-height: 1.5;
   background-color: #292929;
-  background: url('../img/drum.jpg') center center / cover no-repeat;
+  background: url("../img/drum.jpg") center center / cover no-repeat;
   overflow-x: hidden;
 }
 
 body::before {
   position: absolute;
-  content: '';
+  content: "";
   height: 100%;
   width: 100%;
-  background-color: rgba(0,0,0,0.5);
   z-index: -1;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(0px);
 }
 
-h1, h2 {
+h1,
+h2 {
   color: white;
   text-align: center;
   margin-bottom: 15px;
@@ -81,7 +101,7 @@ form button {
   font-family: inherit;
   border: none;
   color: white;
-  background-color: #5F058B;
+  background-color: #5f058b;
   border-radius: 3px;
 }
 
@@ -91,7 +111,7 @@ button,
 select,
 span,
 a {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 button:focus {
@@ -128,15 +148,15 @@ button:focus {
   text-decoration: none;
   text-align: center;
   color: #ff0000;
-  filter: drop-shadow(0px 1px .5px #fff);
+  filter: drop-shadow(0px 1px 0.5px #fff);
   font-size: 1.5rem;
-  font-family: 'Grand Hotel', sans-serif;
+  font-family: "Grand Hotel", sans-serif;
 }
 .youtubeVideoList a {
   position: relative;
   display: block;
   text-decoration: none;
-  transition: transform .3s ease;
+  transition: transform 0.3s ease;
   margin-bottom: 15px;
 }
 .youtubeVideoList a:hover {
@@ -150,7 +170,7 @@ button:focus {
 .youtubeVideoList span {
   color: #fff;
   font-weight: bold;
-  filter: drop-shadow(0 1px .5px #000);
+  filter: drop-shadow(0 1px 0.5px #000);
 }
 
 @keyframes spin {
